@@ -1,4 +1,7 @@
-export default function loadSidebar() {
+import './sidebar.css';
+
+export default function() {
+   console.log('load sidebar');
    clearSidebar();
 }
 
