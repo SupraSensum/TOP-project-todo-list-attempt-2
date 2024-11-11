@@ -65,31 +65,102 @@ export default class TaskHandler {
 
       return newUid;
    }
+   
 
-   createTask({
-      title = '',
-      description = '',
-      dueDate = '',
-      priority = null,
-      notes = '',
-      checklist = '',
-      projects = [],
-      completed = false,
-   }) {
-      const uid = this.#createTaskUID(dueDate);
+}
 
-      const task = {
-         uid,
-         title,
-         description,
-         dueDate,
-         priority,
-         notes,
-         checklist,
-         projects,
-         completed,
-      };
+class Task {
+   #uid;
+   #title;
+   #description;
+   #dueDate;
+   #priority;
+   #notes;
+   #checklist;
+   #projects;
+   #completed;
 
-      TaskHandler.saveTask(task);
+   constructor(taskData) {
+      this.uid = taskData.uid;
+      this.title = taskData.title;
+      this.description = taskData.description;
+      this.dueDate = taskData.dueDate;
+      this.priority = taskData.priority;
+      this.notes = taskData.notes;
+      this.checklist = taskData.checklist;
+      this.projects = taskData.projects;
+      this.completed = taskData.completed;
+   }
+
+   get uid() {
+      return this.#uid;
+   }
+
+   set uid(value) {
+      this.#uid = value;
+   }
+
+   get title() {
+      return this.#title;
+   }
+
+   set title(value) {
+      this.#title = value;
+   }
+
+   get description() {
+      return this.#description;
+   }
+
+   set description(value) {
+      this.#description = value;
+   }
+
+   get dueDate() {
+      return this.#dueDate;
+   }
+
+   set dueDate(value) {
+      this.#dueDate = value;
+   }
+
+   get priority() {
+      return this.#priority;
+   }
+
+   set priority(value) {
+      this.#priority = value;
+   }
+
+   get notes() {
+      return this.#notes;
+   }
+
+   set notes(value) {
+      this.#notes = value;
+   }
+
+   get checklist() {
+      return this.#checklist;
+   }
+
+   set checklist(value) {
+      this.#checklist = value;
+   }
+
+   get projects() {
+      return this.#projects;
+   }
+
+   set projects(value) {
+      this.#projects = value;
+   }
+
+   get completed() {
+      return this.#completed;
+   }
+
+   set completed(value) {
+      this.#completed = value;
    }
 }
