@@ -37,10 +37,6 @@ export default class TaskHandler {
       return TaskHandler.#tasks;
    }
  
-   static set tasks(tasks) {
-      console.warn('TaskHandler.#tasks is not meant to be modified directly. Use methods like TaskHandler.saveTask() or TaskHandler.deleteTask() instead.');
-   }
-
    static saveTask(task) {
       TaskHandler.#tasks.push(task);
    }
@@ -66,7 +62,9 @@ export default class TaskHandler {
       return newUid;
    }
    
-
+   createNewTask(taskData) {
+      
+   }
 }
 
 class Task {
@@ -96,71 +94,35 @@ class Task {
       return this.#uid;
    }
 
-   set uid(value) {
-      this.#uid = value;
-   }
-
    get title() {
       return this.#title;
-   }
-
-   set title(value) {
-      this.#title = value;
    }
 
    get description() {
       return this.#description;
    }
 
-   set description(value) {
-      this.#description = value;
-   }
-
    get dueDate() {
       return this.#dueDate;
-   }
-
-   set dueDate(value) {
-      this.#dueDate = value;
    }
 
    get priority() {
       return this.#priority;
    }
 
-   set priority(value) {
-      this.#priority = value;
-   }
-
    get notes() {
       return this.#notes;
-   }
-
-   set notes(value) {
-      this.#notes = value;
    }
 
    get checklist() {
       return this.#checklist;
    }
 
-   set checklist(value) {
-      this.#checklist = value;
-   }
-
    get projects() {
       return this.#projects;
    }
 
-   set projects(value) {
-      this.#projects = value;
-   }
-
    get completed() {
       return this.#completed;
-   }
-
-   set completed(value) {
-      this.#completed = value;
    }
 }
