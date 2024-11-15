@@ -10,6 +10,10 @@ export default class TaskHandler {
    static get tasks() {
       return TaskHandler.#tasks;
    }
+
+   static getTask(uid) {
+      return TaskHandler.#tasks.find((task) => task.uid === uid);
+   }
  
    static saveTask(task) {
       TaskHandler.#tasks.push(task);

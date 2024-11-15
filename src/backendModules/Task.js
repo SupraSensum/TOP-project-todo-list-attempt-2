@@ -41,39 +41,83 @@ export default class Task {
       TaskHandler.deleteTask(this.#uid);
    }
 
+   update(taskData = {}) {
+      for (const key in taskData) {
+         this[key] = taskData[key];
+      }
+      console.debug('Task updated', TaskHandler.getTask(this.#uid));
+   }
+
    get uid() {
       return this.#uid;
+   }
+
+   set uid(uid) {
+      console.error('Cannot set task UID');
+      console.error({uid});
    }
 
    get title() {
       return this.#title;
    }
 
+   set title(title) {
+      this.#title = title;
+   }
+
    get description() {
       return this.#description;
+   }
+
+   set description(description) {
+      this.#description = description;
    }
 
    get dueDate() {
       return this.#dueDate;
    }
 
+   set dueDate(dueDate) {
+      this.#dueDate = dueDate;
+   }
+
    get priority() {
       return this.#priority;
+   }
+
+   set priority(priority) {
+      this.#priority = priority;
    }
 
    get notes() {
       return this.#notes;
    }
 
+   set notes(notes) {
+      this.#notes = notes;
+   }
+
    get checklist() {
       return this.#checklist;
+   }
+
+   set checklist(checklist) {
+      this.#checklist = checklist;
    }
 
    get projects() {
       return this.#projects;
    }
 
+   set projects(projects) {
+      this.#projects = projects;
+   }
+
    get completed() {
       return this.#completed;
+   }
+
+   set completed(completed) {
+      this.#completed = completed;
    }
 }
