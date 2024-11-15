@@ -22,6 +22,10 @@ export default class Task {
       this.#checklist = taskData.checklist;
       this.#projects = taskData.projects;
       this.#completed = taskData.completed;
+
+      this.#validate();
+
+      console.debug('Task created', this);
    }
 
    static #createTaskUID() {
@@ -48,6 +52,29 @@ export default class Task {
       console.debug('Task updated', TaskHandler.getTask(this.#uid));
    }
 
+   #validate() {
+      const errors = [];
+
+      if (this.#title.length < 2) {
+         errors.push('Title must be at least 2 characters');
+      }
+
+      if (!this.#dueDate) {
+         errors.push('Due date is required');
+      }
+
+      if (this.#priority === null) {
+         errors.push('Priority is required');
+      }
+
+      if (errors.length) {
+         console.debug('Task validation failed. Task not created.');
+         console.debug(`tasks[${this.uid}] is `, TaskHandler.getTask(this.uid));
+         
+         throw new Error(errors.join('\n'));
+      }
+   }
+
    get uid() {
       return this.#uid;
    }
@@ -63,6 +90,7 @@ export default class Task {
 
    set title(title) {
       this.#title = title;
+      this.#validate();
    }
 
    get description() {
@@ -71,6 +99,7 @@ export default class Task {
 
    set description(description) {
       this.#description = description;
+      this.#validate();
    }
 
    get dueDate() {
@@ -79,6 +108,7 @@ export default class Task {
 
    set dueDate(dueDate) {
       this.#dueDate = dueDate;
+      this.#validate();
    }
 
    get priority() {
@@ -87,6 +117,7 @@ export default class Task {
 
    set priority(priority) {
       this.#priority = priority;
+      this.#validate();
    }
 
    get notes() {
@@ -95,6 +126,7 @@ export default class Task {
 
    set notes(notes) {
       this.#notes = notes;
+      this.#validate();
    }
 
    get checklist() {
@@ -103,6 +135,7 @@ export default class Task {
 
    set checklist(checklist) {
       this.#checklist = checklist;
+      this.#validate();
    }
 
    get projects() {
@@ -111,6 +144,7 @@ export default class Task {
 
    set projects(projects) {
       this.#projects = projects;
+      this.#validate();
    }
 
    get completed() {
@@ -119,5 +153,22 @@ export default class Task {
 
    set completed(completed) {
       this.#completed = completed;
+      this.#validate();
    }
+}
+
+// for console testing
+if (false) {
+for (let i = 0; i < 1000; i++) {
+   taskHandler.createNewTask({
+      title: 'I AM YOU',
+      description: '',
+      dueDate: 'SUCK MY BALLS',
+      priority: 1,
+      notes: '',
+      checklist: '',
+      projects: [],
+      completed: false,
+   })
+}
 }
