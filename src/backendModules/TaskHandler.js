@@ -1,4 +1,4 @@
-import * as DateFns from 'date-fns';
+import Task from "./Task.js";
 
 export default class TaskHandler {
    constructor() {
@@ -22,22 +22,8 @@ export default class TaskHandler {
    static uidExists(uid) {
       return TaskHandler.#tasks.some((task) => task.uid === uid);
    }
-
-   #createTaskUID(dueDate) {
-      const now = DateFns.format(new Date(), "yyyy-MM-dd_HH-mm-ss");
-      let randomUuid = crypto.randomUUID();
-      let newUid = `task-${now}-${randomUuid}`;
-
-      while (TaskHandler.uidExists(newUid)) {
-         randomUuid = crypto.randomUUID();
-         newUid = `task-${now}-${randomUuid}`;
-      }
-
-      return newUid;
-   }
    
    createNewTask(taskData) {
-      taskData.uid = this.#createTaskUID(taskData.dueDate);
       TaskHandler.saveTask(new Task(taskData));
    }
 }

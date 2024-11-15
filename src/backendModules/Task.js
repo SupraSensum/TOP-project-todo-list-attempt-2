@@ -1,16 +1,19 @@
-class Task {
-   #uid;
-   #title;
-   #description;
-   #dueDate;
-   #priority;
-   #notes;
-   #checklist;
-   #projects;
-   #completed;
+import TaskHandler from "./TaskHandler.js";
+import * as DateFns from 'date-fns';
+
+export default class Task {
+   #uid = '';
+   #title = '';
+   #description = '';
+   #dueDate = '';
+   #priority = null;
+   #notes = '';
+   #checklist = '';
+   #projects = [];
+   #completed = false;
 
    constructor(taskData) {
-      this.#uid = taskData.uid;
+      this.#uid = Task.#createTaskUID();
       this.#title = taskData.title;
       this.#description = taskData.description;
       this.#dueDate = taskData.dueDate;
@@ -19,6 +22,23 @@ class Task {
       this.#checklist = taskData.checklist;
       this.#projects = taskData.projects;
       this.#completed = taskData.completed;
+   }
+
+   static #createTaskUID() {
+      const now = DateFns.format(new Date(), "yyyy-MM-dd_HH-mm-ss");
+      let randomUuid = crypto.randomUUID();
+      let newUid = `task-${now}-${randomUuid}`;
+
+      while (TaskHandler.uidExists(newUid)) {
+         randomUuid = crypto.randomUUID();
+         newUid = `task-${now}-${randomUuid}`;
+      }
+
+      return newUid;
+   }
+
+   delete() {
+      TaskHandler.deleteTask(this.#uid);
    }
 
    get uid() {
