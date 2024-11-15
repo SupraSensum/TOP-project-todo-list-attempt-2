@@ -161,7 +161,7 @@ export default class Task {
 if (false) {
 for (let i = 0; i < 1000; i++) {
    taskHandler.createNewTask({
-      title: 'I AM YOU',
+      title: `I AM YOU${'U'.repeat(i)}`,
       description: '',
       dueDate: 'SUCK MY BALLS',
       priority: 1,
