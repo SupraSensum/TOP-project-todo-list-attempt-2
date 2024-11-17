@@ -147,14 +147,14 @@ export default class Task {
    }
 
    delete() {
-      Task.deleteTask(this.#uid);
+      Task.deleteTask(this.uid);
    }
 
    update(taskData = {}) {
       for (const key in taskData) {
          this[key] = taskData[key];
       }
-      console.debug('Updated task:', Task.getTask(this.#uid));
+      console.debug('Updated task:', Task.getTask(this.uid));
    }
 
    #validate() {
