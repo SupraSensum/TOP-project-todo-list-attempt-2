@@ -154,7 +154,7 @@ export default class Task {
       for (const key in taskData) {
          this[key] = taskData[key];
       }
-      console.debug('Updated task:', Task.getTask(this.uid));
+      console.debug('Updated task:', this);
    }
 
    #validate() {
@@ -174,7 +174,7 @@ export default class Task {
 
       if (errors.length) {
          console.debug('Task validation failed. Task not created.');
-         console.debug(`tasks[${this.uid}] is `, Task.getTask(this.uid));
+         console.debug(`tasks[${this.uid}] is `, this);
          
          throw new Error(errors.join('\n'));
       }
