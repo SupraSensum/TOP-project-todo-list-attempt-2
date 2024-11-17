@@ -1,7 +1,42 @@
-import TaskHandler from "./TaskHandler.js";
 import * as DateFns from 'date-fns';
 
 export default class Task {
+
+   static #tasks = [];
+
+   static get tasks() {
+      return Task.#tasks;
+   }
+
+   static getTask(uid) {
+      return Task.#tasks.find((task) => task.uid === uid);
+   }
+
+   static saveTask(task) {
+      Task.#tasks.push(task);
+   }
+
+   static deleteTask(uid) {
+      Task.#tasks = Task.#tasks.filter((task) => task.uid !== uid);
+   }
+
+   static uidExists(uid) {
+      return Task.#tasks.some((task) => task.uid === uid);
+   }
+
+   static #createTaskUID() {
+      const now = DateFns.format(new Date(), "yyyy-MM-dd_HH-mm-ss");
+      let randomUuid = crypto.randomUUID();
+      let newUid = `task-${now}-${randomUuid}`;
+
+      while (Task.uidExists(newUid)) {
+         randomUuid = crypto.randomUUID();
+         newUid = `task-${now}-${randomUuid}`;
+      }
+
+      return newUid;
+   }
+
    #uid = '';
    #title = '';
    #description = '';
@@ -25,54 +60,9 @@ export default class Task {
 
       this.#validate();
 
+      Task.saveTask(this);
+
       console.debug('Task created', this);
-   }
-
-   static #createTaskUID() {
-      const now = DateFns.format(new Date(), "yyyy-MM-dd_HH-mm-ss");
-      let randomUuid = crypto.randomUUID();
-      let newUid = `task-${now}-${randomUuid}`;
-
-      while (TaskHandler.uidExists(newUid)) {
-         randomUuid = crypto.randomUUID();
-         newUid = `task-${now}-${randomUuid}`;
-      }
-
-      return newUid;
-   }
-
-   delete() {
-      TaskHandler.deleteTask(this.#uid);
-   }
-
-   update(taskData = {}) {
-      for (const key in taskData) {
-         this[key] = taskData[key];
-      }
-      console.debug('Task updated', TaskHandler.getTask(this.#uid));
-   }
-
-   #validate() {
-      const errors = [];
-
-      if (this.#title.length < 2) {
-         errors.push('Title must be at least 2 characters');
-      }
-
-      if (!this.#dueDate) {
-         errors.push('Due date is required');
-      }
-
-      if (this.#priority === null) {
-         errors.push('Priority is required');
-      }
-
-      if (errors.length) {
-         console.debug('Task validation failed. Task not created.');
-         console.debug(`tasks[${this.uid}] is `, TaskHandler.getTask(this.uid));
-         
-         throw new Error(errors.join('\n'));
-      }
    }
 
    get uid() {
@@ -81,7 +71,7 @@ export default class Task {
 
    set uid(uid) {
       console.error('Cannot set task UID');
-      console.error({uid});
+      console.error({ uid });
    }
 
    get title() {
@@ -155,20 +145,38 @@ export default class Task {
       this.#completed = completed;
       this.#validate();
    }
-}
 
-// for console testing
-if (false) {
-for (let i = 0; i < 1000; i++) {
-   taskHandler.createNewTask({
-      title: `I AM YOU${'U'.repeat(i)}`,
-      description: '',
-      dueDate: 'SUCK MY BALLS',
-      priority: 1,
-      notes: '',
-      checklist: '',
-      projects: [],
-      completed: false,
-   })
-}
+   delete() {
+      Task.deleteTask(this.#uid);
+   }
+
+   update(taskData = {}) {
+      for (const key in taskData) {
+         this[key] = taskData[key];
+      }
+      console.debug('Updated task:', Task.getTask(this.#uid));
+   }
+
+   #validate() {
+      const errors = [];
+
+      if (this.#title.length < 2) {
+         errors.push('Title must be at least 2 characters');
+      }
+
+      if (!this.#dueDate) {
+         errors.push('Due date is required');
+      }
+
+      if (this.#priority === null) {
+         errors.push('Priority is required');
+      }
+
+      if (errors.length) {
+         console.debug('Task validation failed. Task not created.');
+         console.debug(`tasks[${this.uid}] is `, Task.getTask(this.uid));
+         
+         throw new Error(errors.join('\n'));
+      }
+   }
 }
