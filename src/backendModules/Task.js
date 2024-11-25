@@ -13,11 +13,6 @@ export default class Task {
       return Task.#tasks.find((task) => task.uid === uid);
    }
 
-   static saveTask(task) {
-      Task.#tasks.push(task);
-      console.info(`Saved task with UID: ${task.uid}`);
-   }
-
    static deleteTask(uid) {
       Task.#tasks = Task.#tasks.filter((task) => task.uid !== uid);
       console.info(`Deleted task with UID: ${uid}`);
@@ -25,6 +20,11 @@ export default class Task {
 
    static uidExists(uid) {
       return Task.#tasks.some((task) => task.uid === uid);
+   }
+
+   static #saveTask(task) {
+      Task.#tasks.push(task);
+      console.info(`Saved task with UID: ${task.uid}`);
    }
 
    static #createTaskUID() {
@@ -65,7 +65,7 @@ export default class Task {
 
       console.info(`Created task with UID: ${this.uid}`);
       
-      Task.saveTask(this);
+      Task.#saveTask(this);
    }
 
    get uid() {

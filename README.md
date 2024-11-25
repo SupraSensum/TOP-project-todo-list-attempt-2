@@ -12,11 +12,11 @@
   - [x] checklist
   - [x] projects
   - [x] completed
-- [ ] CLI should be able to do the following for each task
-  - [ ] create
-  - [ ] read
-  - [ ] update
-  - [ ] delete
+- [x] CLI should be able to do the following for each task
+  - [x] create
+  - [x] read
+  - [x] update
+  - [x] delete
 - [ ] Todo app should open to a default `project`
 - [ ] Separate application logic into modules
 - [ ] User interface should be able to:
