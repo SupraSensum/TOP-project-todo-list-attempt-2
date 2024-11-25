@@ -161,6 +161,26 @@ export default class Task {
       console.debug(this);
    }
 
+   assignToProject(project) {
+      if (!this.projects.includes(project)) {
+         this.projects.push(project);
+         console.info(`Task with UID: ${this.uid} assigned to project "${project}".`);
+         console.debug(this);
+      } else {
+         console.info(`This task is already assigned to project "${project}".`);
+      }
+   }
+
+   unassignFromProject(project) {
+      if (this.projects.includes(project)) {
+         this.projects = this.projects.filter((p) => p !== project);
+         console.info(`Task with UID: ${this.uid} unassigned from project "${project}".`);
+         console.debug(this);
+      } else {
+         console.info(`Task with UID: ${this.uid} is not assigned to project "${project}".`);
+      }
+   }
+
    #validate() {
       const errors = [];
 
