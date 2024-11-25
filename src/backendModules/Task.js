@@ -9,15 +9,18 @@ export default class Task {
    }
 
    static getTask(uid) {
+      console.info(`Getting task with UID: ${uid}`);
       return Task.#tasks.find((task) => task.uid === uid);
    }
 
    static saveTask(task) {
       Task.#tasks.push(task);
+      console.info(`Saved task with UID: ${task.uid}`);
    }
 
    static deleteTask(uid) {
       Task.#tasks = Task.#tasks.filter((task) => task.uid !== uid);
+      console.info(`Deleted task with UID: ${uid}`);
    }
 
    static uidExists(uid) {
@@ -60,9 +63,9 @@ export default class Task {
 
       this.#validate();
 
+      console.info(`Created task with UID: ${this.uid}`);
+      
       Task.saveTask(this);
-
-      console.debug('Task created', this);
    }
 
    get uid() {
@@ -154,7 +157,8 @@ export default class Task {
       for (const key in taskData) {
          this[key] = taskData[key];
       }
-      console.debug('Updated task:', this);
+      console.info(`Updated task with UID: ${this.uid}`);
+      console.debug(this);
    }
 
    #validate() {
