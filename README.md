@@ -2,16 +2,16 @@
 
 ## To do
 
-- [ ] Each `todo` should be an object; use classes; need to refactor current implementation
-- [ ] Give each `todo` the following properties:
-  - [ ] title
-  - [ ] description
-  - [ ] dueDate
-  - [ ] priority
-  - [ ] notes
-  - [ ] checklist
-  - [ ] projects
-  - [ ] completed
+- [x] Each `todo` should be an object; use classes; need to refactor current implementation
+- [x] Give each `todo` the following properties:
+  - [x] title
+  - [x] description
+  - [x] dueDate
+  - [x] priority
+  - [x] notes
+  - [x] checklist
+  - [x] projects
+  - [x] completed
 - [ ] Todo app should open to a default `project`
 - [ ] Separate application logic into modules
 - [ ] User interface should be able to:
