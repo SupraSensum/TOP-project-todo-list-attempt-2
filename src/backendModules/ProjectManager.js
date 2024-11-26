@@ -39,6 +39,26 @@ export default class ProjectManager {
       }
    }
 
+   static removeTaskFromProject(task, project) {
+      const projectExists = ProjectManager.#projects[project];
+      if (projectExists) {
+         ProjectManager.#projects[project] = ProjectManager.#projects[project].filter(
+            e => e !== task
+         );
+
+         console.debug(`Task with UID: ${task.uid} unassigned from project "${project}".`);
+      } else {
+         console.warn(`Task with UID: ${task.uid} is not assigned to project "${project}".`);
+      }
+
+      const isTaskInProject = ProjectManager.#projects[project].includes(task);
+      if (isTaskInProject) {
+         console.warn(`Verification: Task with UID: ${task.uid} was not removed from project "${project}".`);
+      } else {
+         console.debug(`Verification: Task with UID: ${task.uid} was successfully removed from project "${project}".`);
+      }
+   }
+
    // static initialization block
    static {
       console.info('projects', ProjectManager.listProjects());

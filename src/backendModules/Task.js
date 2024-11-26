@@ -176,12 +176,12 @@ export default class Task {
 
    unassignFromProject(project) {
       if (this.projects.includes(project)) {
-         this.projects = this.projects.filter((p) => p !== project);
-         console.debug(`Task with UID: ${this.uid} unassigned from project "${project}".`);
-         console.debug(this);
+         this.projects = this.projects.filter(p => p !== project);
+         ProjectManager.removeTaskFromProject(this, project);
       } else {
          console.warn(`Task with UID: ${this.uid} is not assigned to project "${project}".`);
       }
+      console.debug(`Task with UID: ${this.uid} belongs to: `, this.projects);
    }
 
    #validate() {
