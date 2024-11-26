@@ -165,13 +165,7 @@ export default class Task {
    }
 
    assignToProject(project) {
-      if (!this.projects.includes(project)) {
-         this.projects.push(project);
-         console.debug(`Task with UID: ${this.uid} assigned to project "${project}".`);
-         console.debug(this);
-      } else {
-         console.warn(`This task is already assigned to project "${project}".`);
-      }
+      ProjectManager.addTaskToProject(this, project);
    }
 
    unassignFromProject(project) {

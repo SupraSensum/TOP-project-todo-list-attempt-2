@@ -18,7 +18,23 @@ export default class ProjectManager {
       return Object.keys(ProjectManager.#projects);
    }
 
-   constructor() {
-      console.info(ProjectManager.listProjects());
+   static addTaskToProject(task, project) {
+      if (!ProjectManager.#projects[project]) {
+         ProjectManager.#projects[project] = [];
+      }
+
+      if (!ProjectManager.#projects[project].includes(task)) {
+         ProjectManager.#projects[project].push(task);
+         task.projects.push(project);
+         console.debug(`Task with UID: ${task} added to project "${project}".`);
+      } else {
+         console.debug(`Task with UID: ${task} already exists in project "${project}".`);
+      }
+      console.debug(`#projects.${project}: `, ProjectManager.#projects[project]);
+   }
+
+   // static initialization block
+   static {
+      console.info('projects', ProjectManager.listProjects());
    }
 }
