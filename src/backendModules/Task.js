@@ -1,4 +1,7 @@
 import * as DateFns from 'date-fns';
+import ProjectManager from './ProjectManager';
+
+const projectManager = new ProjectManager();
 
 export default class Task {
 
@@ -9,13 +12,13 @@ export default class Task {
    }
 
    static getTask(uid) {
-      console.info(`Getting task with UID: ${uid}`);
+      console.debug(`Getting task with UID: ${uid}`);
       return Task.#tasks.find((task) => task.uid === uid);
    }
 
    static deleteTask(uid) {
       Task.#tasks = Task.#tasks.filter((task) => task.uid !== uid);
-      console.info(`Deleted task with UID: ${uid}`);
+      console.debug(`Deleted task with UID: ${uid}`);
    }
 
    static uidExists(uid) {
@@ -24,7 +27,7 @@ export default class Task {
 
    static #saveTask(task) {
       Task.#tasks.push(task);
-      console.info(`Saved task with UID: ${task.uid}`);
+      console.debug(`Saved task with UID: ${task.uid}`);
    }
 
    static #createTaskUID() {
@@ -63,7 +66,7 @@ export default class Task {
 
       this.#validate();
 
-      console.info(`Created task with UID: ${this.uid}`);
+      console.debug(`Created task with UID: ${this.uid}`);
       
       Task.#saveTask(this);
    }
@@ -73,8 +76,8 @@ export default class Task {
    }
 
    set uid(uid) {
-      console.error('Cannot set task UID');
-      console.error({ uid });
+      console.warn('Cannot set task UID');
+      console.warn({ uid });
    }
 
    get title() {
@@ -157,27 +160,27 @@ export default class Task {
       for (const key in taskData) {
          this[key] = taskData[key];
       }
-      console.info(`Updated task with UID: ${this.uid}`);
+      console.debug(`Updated task with UID: ${this.uid}`);
       console.debug(this);
    }
 
    assignToProject(project) {
       if (!this.projects.includes(project)) {
          this.projects.push(project);
-         console.info(`Task with UID: ${this.uid} assigned to project "${project}".`);
+         console.debug(`Task with UID: ${this.uid} assigned to project "${project}".`);
          console.debug(this);
       } else {
-         console.info(`This task is already assigned to project "${project}".`);
+         console.warn(`This task is already assigned to project "${project}".`);
       }
    }
 
    unassignFromProject(project) {
       if (this.projects.includes(project)) {
          this.projects = this.projects.filter((p) => p !== project);
-         console.info(`Task with UID: ${this.uid} unassigned from project "${project}".`);
+         console.debug(`Task with UID: ${this.uid} unassigned from project "${project}".`);
          console.debug(this);
       } else {
-         console.info(`Task with UID: ${this.uid} is not assigned to project "${project}".`);
+         console.warn(`Task with UID: ${this.uid} is not assigned to project "${project}".`);
       }
    }
 
@@ -197,8 +200,8 @@ export default class Task {
       }
 
       if (errors.length) {
-         console.debug('Task validation failed. Task not created.');
-         console.debug(`tasks[${this.uid}] is `, this);
+         console.error('Task validation failed. Task not created.');
+         console.error(`tasks[${this.uid}] is `, this);
          
          throw new Error(errors.join('\n'));
       }

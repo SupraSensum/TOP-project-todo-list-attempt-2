@@ -1,7 +1,7 @@
 import './sidebar.css';
 
 export default function() {
-   console.log('load sidebar');
+   console.debug('load sidebar');
    clearSidebar();
 }
 
