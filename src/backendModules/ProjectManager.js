@@ -21,16 +21,22 @@ export default class ProjectManager {
    static addTaskToProject(task, project) {
       if (!ProjectManager.#projects[project]) {
          ProjectManager.#projects[project] = [];
+         console.debug(`Created project "${project}".`);
       }
 
-      if (!ProjectManager.#projects[project].includes(task)) {
-         ProjectManager.#projects[project].push(task);
-         task.projects.push(project);
-         console.debug(`Task with UID: ${task} added to project "${project}".`);
+      if (ProjectManager.#projects[project].includes(task)) {
+         console.warn(`Task with UID: ${task.uid} already exists in project "${project}".`);
       } else {
-         console.debug(`Task with UID: ${task} already exists in project "${project}".`);
+         ProjectManager.#projects[project].push(task);
+         console.debug(`Task with UID: ${task.uid} added to project "${project}".`);
       }
-      console.debug(`#projects.${project}: `, ProjectManager.#projects[project]);
+
+      const isTaskInProject = ProjectManager.#projects[project].includes(task);
+      if (!isTaskInProject) {
+         console.warn(`Verification: Task with UID: ${task.uid} was not added to project "${project}".`);
+      } else {
+         console.debug(`Verification: Task with UID: ${task.uid} was successfully added to project "${project}".`);
+      }
    }
 
    // static initialization block
