@@ -37,6 +37,8 @@ export default class ProjectManager {
       } else {
          console.debug(`Verification: Task with UID: ${task.uid} was successfully added to project "${project}".`);
       }
+
+      console.debug(`All tasks in project "${project}: `, ProjectManager.#projects[project]);
    }
 
    static removeTaskFromProject(task, project) {
@@ -57,10 +59,12 @@ export default class ProjectManager {
       } else {
          console.debug(`Verification: Task with UID: ${task.uid} was successfully removed from project "${project}".`);
       }
+
+      console.debug(`All tasks in project "${project}: `, ProjectManager.#projects[project]);
    }
 
    // static initialization block
    static {
-      console.info('projects', ProjectManager.listProjects());
+      console.debug('projects', ProjectManager.listProjects());
    }
 }
