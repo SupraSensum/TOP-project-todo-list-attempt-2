@@ -1,7 +1,7 @@
 export default class ProjectManager {
    static #projects = {};
 
-   static listProjects() {
+   static getProjectNames() {
       return Object.keys(ProjectManager.#projects);
    }
 
@@ -56,6 +56,6 @@ export default class ProjectManager {
 
    // static initialization block
    static {
-      console.debug('projects', ProjectManager.listProjects());
+      console.debug('projects', ProjectManager.getProjectNames());
    }
 }

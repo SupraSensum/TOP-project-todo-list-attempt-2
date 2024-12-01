@@ -17,7 +17,7 @@
   - [x] read
   - [x] update
   - [x] delete
-- [ ] Todo app should open to a default `project`
+- [x] Todo app should open to a default `project`
 - [x] Separate application logic into modules
 - [ ] User interface should be able to:
   - [ ] View all projects
