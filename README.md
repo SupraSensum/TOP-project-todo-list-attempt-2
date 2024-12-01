@@ -18,7 +18,7 @@
   - [x] update
   - [x] delete
 - [ ] Todo app should open to a default `project`
-- [ ] Separate application logic into modules
+- [x] Separate application logic into modules
 - [ ] User interface should be able to:
   - [ ] View all projects
   - [ ] View all todos in each project (probably just the title and duedate… perhaps changing color for different priorities)
@@ -29,6 +29,9 @@
 - [ ] Persistent storage
   - [ ] `localStorage`
   - [ ] app should check first if `localStorage` is available and prompt user to load it
+- [ ] Improve validation
+  - [ ] needs to happen before changes are made (e.g. a property is modified)
+  - [ ] remove redundant #validate() calls, ocurring both in the setters and the constructor
 
 ## What are we trying to show off here?
 

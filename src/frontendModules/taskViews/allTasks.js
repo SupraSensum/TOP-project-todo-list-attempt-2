@@ -1,12 +1,11 @@
-// import '../content.css';
-import Task from '../../backendModules/Task';
+import ProjectManager from '../../backendModules/ProjectManager';
 
 export default function () {
    console.debug('load allTasks.js');
 
    const contentContainer = document.getElementById('content');
    const taskList = document.createElement('ol');
-   const allTasks = Task.tasks;
+   const allTasks = ProjectManager.getTasksFromProject('default');
    console.debug(`allTasks is a ${typeof allTasks}`);
    console.debug(`allTasks has ${allTasks.size ?? allTasks.length} items and is a ${Array.isArray(allTasks) ? 'array' : 'plain object'}`);
    allTasks.forEach(task => {

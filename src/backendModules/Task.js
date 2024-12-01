@@ -66,6 +66,8 @@ export default class Task {
 
       this.#validate();
 
+      this.#assignTaskToDefaultProject();
+
       console.debug(`Created task with UID: ${this.uid}`);
       
       Task.#saveTask(this);
@@ -139,7 +141,7 @@ export default class Task {
    }
 
    set projects(projects) {
-      this.#projects = projects;
+      console.warn(`Direct modifcation of the "projects" array is prohibited`, projects);
       this.#validate();
    }
 
@@ -165,23 +167,28 @@ export default class Task {
    }
 
    assignToProject(project) {
-      if (this.projects.includes(project)) {
+      if (this.#projects.includes(project)) {
          console.warn(`Task with UID: ${this.uid} is already assigned to project "${project}".`);
       } else {
-         this.projects.push(project);
+         this.#projects.push(project);
          ProjectManager.addTaskToProject(this, project);
       }
-      console.debug(`Task with UID: ${this.uid} belongs to: `, this.projects);
+      console.debug(`Task with UID: ${this.uid} belongs to: `, this.#projects);
    }
 
    unassignFromProject(project) {
-      if (this.projects.includes(project)) {
-         this.projects = this.projects.filter(p => p !== project);
+      if (this.#projects.includes(project)) {
+         this.#projects = this.#projects.filter(p => p !== project);
          ProjectManager.removeTaskFromProject(this, project);
       } else {
          console.warn(`Task with UID: ${this.uid} is not assigned to project "${project}".`);
       }
-      console.debug(`Task with UID: ${this.uid} belongs to: `, this.projects);
+      console.debug(`Task with UID: ${this.uid} belongs to: `, this.#projects);
+   }
+
+   #assignTaskToDefaultProject() {
+      const defaultProject = 'default';
+      this.assignToProject(defaultProject);
    }
 
    #validate() {
