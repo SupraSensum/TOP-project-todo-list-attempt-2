@@ -7,9 +7,6 @@ import './cssReset.css';
 import './body.css';
 
 loadSidebar();
-
-window.Task = Task;
-
 for (let i = 0; i < 1000; i++) {
    new Task({
       title: `I AM YOU${'U'.repeat(i)}`,
@@ -22,3 +19,18 @@ for (let i = 0; i < 1000; i++) {
       completed: false,
    })
 }
+loadContent();
+
+window.Task = Task;
+
+
+// new Task({
+//    title: `I AM YOU`,
+//    description: '',
+//    dueDate: 'SUCK MY BALLS',
+//    priority: 1,
+//    notes: '',
+//    checklist: '',
+//    projects: [],
+//    completed: false,
+// })
