@@ -7,22 +7,25 @@ import './cssReset.css';
 import './body.css';
 
 loadSidebar();
-for (let i = 0; i < 30; i++) {
-   new Task({
-      title: `I AM YOU${'U'.repeat(i)}`,
-      description: '',
-      dueDate: 'SUCK MY BALLS',
-      priority: 1,
-      notes: '',
-      checklist: '',
-      projects: [],
-      completed: false,
-   })
-}
+createTestTasks(30);
 loadContent();
 
 window.Task = Task;
 
+function createTestTasks(numTasksToCreate = 100) {
+   for (let i = 0; i < numTasksToCreate; i++) {
+      new Task({
+         title: `I AM YOU${'U'.repeat(i)}`,
+         description: '',
+         dueDate: 'SUCK MY BALLS',
+         priority: 1,
+         notes: '',
+         checklist: '',
+         projects: [],
+         completed: false,
+      })
+   }
+}
 
 // new Task({
 //    title: `I AM YOU`,
