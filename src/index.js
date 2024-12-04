@@ -7,7 +7,7 @@ import './cssReset.css';
 import './body.css';
 
 loadSidebar();
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 30; i++) {
    new Task({
       title: `I AM YOU${'U'.repeat(i)}`,
       description: '',
