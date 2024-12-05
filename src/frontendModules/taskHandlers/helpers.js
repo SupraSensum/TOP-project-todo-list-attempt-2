@@ -1,6 +1,8 @@
-import BlurLayer from "../blur-layer.js";
+import BlurLayer from "../misc/blur-layer.js";
 import TaskHandler from "../../backend_modules/task-handler.js";
-import { updateTaskList } from "../create-task-list.js";
+import { updateTaskList } from "../../frontend_modules.old/create-task-list.js";
+
+const taskHandler = new TaskHandler();
 
 export function createTaskBox(taskBoxId, headerText) {
    if (!document.getElementById(taskBoxId)) {
@@ -77,8 +79,6 @@ function getFormData(form) {
 }
 
 function createTaskForm(taskFormId, taskBoxId) {
-   const taskHandler = new TaskHandler();
-
    const form = document.createElement('form');
    form.classList.add('taskForm');
    form.id = taskFormId;

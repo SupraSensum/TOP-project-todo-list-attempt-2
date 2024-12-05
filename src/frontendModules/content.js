@@ -1,10 +1,10 @@
 import './content.css';
-import allTasks from './taskViews/allTasks';
+import showAllTasks from './taskViews/showAllTasks';
 
 export default function () {
    console.debug('load content.js');
    clearContentElement();
-   allTasks();
+   showAllTasks();
 }
 
 function clearContentElement() {

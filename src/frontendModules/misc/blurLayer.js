@@ -1,11 +1,7 @@
-import "./blur-layer.css";
+import "./blurLayer.css";
 
 export default class BlurLayer {
-   constructor() {
-      
-   }
-   
-   static create(zIndex = 9998, id = "overlay") {
+   static create(zIndex = 9998, id = "blurOverlay") {
       if (!document.getElementById(id)) {
          const overlay = document.createElement('div');
          overlay.id = id;
@@ -17,7 +13,7 @@ export default class BlurLayer {
       }
    }
 
-   static remove(id = "overlay") {
+   static remove(id = "blurOverlay") {
       const overlay = document.getElementById(id);
       if (overlay) {
          overlay.remove();
