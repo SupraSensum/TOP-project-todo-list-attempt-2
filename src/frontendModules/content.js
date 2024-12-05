@@ -3,7 +3,11 @@ import allTasks from './taskViews/allTasks';
 
 export default function () {
    console.debug('load content.js');
-   const contentContainer = document.getElementById('content');
-   contentContainer.innerHTML = '';
+   clearContentElement();
    allTasks();
+}
+
+function clearContentElement() {
+   const contentContainer = document.getElementById('content');
+   contentContainer.innerHTML = "";
 }
