@@ -1,4 +1,4 @@
-import showNewTaskFrom from "../frontendModules/createNewTask/showNewTaskForm.js";
+import showNewTaskFrom from "./createNewTask/showNewTaskForm.js";
 
 import './sidebar.css';
 
